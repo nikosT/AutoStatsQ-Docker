@@ -1,5 +1,5 @@
 # AutoStatsQ-Docker
-Dockerization of the AutoStatsQ software.
+Dockerization of the AutoStatsQ software https://github.com/gesape/AutoStatsQ.
 
 * ## Download
 ```
