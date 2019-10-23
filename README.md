@@ -1,14 +1,16 @@
 # AutoStatsQ-Docker
 Dockerization of the AutoStatsQ software
 
-* Start the container:
-```
+## Download
 git clone https://github.com/nikosT/AutoStatsQ-Docker.git
 cd AutoStatsQ-Docker
+
+## Start the container:
+```
 make start
 ```
 
-* Stop the container:
+## Stop the container:
 ```
 exit
 ```
