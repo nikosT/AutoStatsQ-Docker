@@ -8,13 +8,13 @@ git clone https://github.com/nikosT/AutoStatsQ-Docker.git
 Set the ```ARCHIVE``` variable inside the ```Makefile``` to the path where your SDS structure is.
 
 
-* ## Start the container:
+* ## Start the container
 ```
 cd AutoStatsQ-Docker
 make start
 ```
 
-* ## Stop the container:
+* ## Stop the container
 ```
 exit
 ```
