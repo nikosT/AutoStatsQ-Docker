@@ -1,6 +1,6 @@
 .PHONY: help
 .DEFAULT_GOAL := help
-ARCHIVE=~/Desktop/archive
+ARCHIVE=/archive
 APP_NAME=autostatsq
 
 help: ## This help
