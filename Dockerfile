@@ -33,7 +33,7 @@ libfreetype6-dev
 RUN apt install -y ghostscript build-essential cmake libnetcdf-dev \
 libfftw3-dev libpcre3-dev
 RUN apt install -y gdal-bin wget
-RUN wget ftp://ftp.soest.hawaii.edu/gmt/gmt-5.4.5-src.tar.xz
+RUN wget ftp://ftp.iris.washington.edu/pub/gmt/gmt-5.4.5-src.tar.xz
 RUN tar xf ./gmt-5.4.5-src.tar.xz
 RUN rm -fr ./gmt-5.4.5/build && mkdir ./gmt-5.4.5/build
 RUN cd ./gmt-5.4.5/build && \
