@@ -8,9 +8,9 @@
 
 
 # ******************** Base OS ***********************************************
-# get Ubuntu 16.04 image
-FROM ubuntu:16.04
-RUN apt update
+# get Ubuntu 18.04 image
+FROM ubuntu:18.04
+RUN apt update -y
 
 
 # ******************** METADATA **********************************************
@@ -33,22 +33,25 @@ libfreetype6-dev
 RUN apt install -y ghostscript build-essential cmake libnetcdf-dev \
 libfftw3-dev libpcre3-dev
 RUN apt install -y gdal-bin wget
-RUN wget ftp://ftp.iris.washington.edu/pub/gmt/gmt-5.4.5-src.tar.xz
-RUN tar xf ./gmt-5.4.5-src.tar.xz
-RUN rm -fr ./gmt-5.4.5/build && mkdir ./gmt-5.4.5/build
-RUN cd ./gmt-5.4.5/build && \
-    cmake -DCMAKE_INSTALL_PREFIX=/usr \
-      -DGSHHG_ROOT=/usr/share/gmt/coast \
-      -DGMT_LIBDIR=lib \
-      -DDCW_ROOT=/usr/share/gmt/dcw \
-      -DGMT_DATADIR=share/gmt \
-      -DGMT_MANDIR=share/man \
-      -DGMT_DOCDIR=share/doc/gmt \
-      -DCMAKE_BUILD_TYPE=Release .. && \
-    make && make install
+#RUN wget ftp://ftp.iris.washington.edu/pub/gmt/gmt-5.4.5-src.tar.xz
+#RUN tar xf ./gmt-5.4.5-src.tar.xz
+#RUN rm -fr ./gmt-5.4.5/build && mkdir ./gmt-5.4.5/build
+#RUN cd ./gmt-5.4.5/build && \
+#    cmake -DCMAKE_INSTALL_PREFIX=/usr \
+#      -DGSHHG_ROOT=/usr/share/gmt/coast \
+#      -DGMT_LIBDIR=lib \
+#      -DDCW_ROOT=/usr/share/gmt/dcw \
+#      -DGMT_DATADIR=share/gmt \
+#      -DGMT_MANDIR=share/man \
+#      -DGMT_DOCDIR=share/doc/gmt \
+#      -DCMAKE_BUILD_TYPE=Release .. && \
+#    make && make install
+
+RUN apt install -y gmt gmt-dcw gmt-gshhg
 
 # install pyrocko with dependencies (matplotlib etc.)
 RUN apt install -y make git python3-dev python3-setuptools
+RUN DEBIAN_FRONTEND="noninteractive" apt install -y tzdata
 RUN apt install -y python3-numpy python3-numpy-dev python3-scipy \
 python3-matplotlib
 RUN apt install -y python3-pyqt4 python3-pyqt4.qtopengl
@@ -66,6 +69,7 @@ RUN cd pyrocko && python3 setup.py install
 RUN git clone https://git.pyrocko.org/pyrocko/grond.git
 RUN cd grond && python3 setup.py install
 
+RUN apt install -y poppler-utils imagemagick
 # install AutoStatsQ
 RUN git clone https://github.com/gesape/AutoStatsQ AutoStatsQ
 RUN cd AutoStatsQ && python3 setup.py install
@@ -76,3 +80,4 @@ RUN mkdir -p /vault
 # archive is a link to the SDS structure
 RUN mkdir -p /archive
 
+RUN mkdir -p /root/.config/matplotlib && echo "backend: Agg" > ~/.config/matplotlib/matplotlibrc
