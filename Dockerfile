@@ -72,7 +72,13 @@ RUN cd grond && python3 setup.py install
 RUN apt install -y poppler-utils imagemagick
 # install AutoStatsQ
 RUN git clone https://github.com/gesape/AutoStatsQ AutoStatsQ
+
+# Modify Timeout for FDSN
+RUN sed -i '0,/from pyrocko.client import catalog, fdsn/s//from pyrocko.client import catalog, fdsn\nfdsn.g_timeout = 60.\n/' AutoStatsQ/src/network_control.py
+
+# setup AutoStatsQ
 RUN cd AutoStatsQ && python3 setup.py install
+
 
 # vault contains all data stuff
 RUN mkdir -p /vault
